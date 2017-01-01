@@ -1,0 +1,24 @@
+{
+  "db_file": "tracer.sqlite",
+  "db_instance": [
+    "tracer",
+    "route"
+  ],
+  "table_schema": {
+    "tracer": {
+      "datetime": "SMALLDATETIME",
+      "src_host": "TEXT",
+      "dst_host": "TEXT",
+      "host": "TEXT",
+      "as_number": "TEXT",
+      "packet_count": "TINYINT",
+      "packet_snt": "INT",
+      "packet_rcv": "INT",
+      "packet_drop": "INT",
+      "packet_loss": "NUMERIC",
+      "latency_avg": "NUMERIC",
+      "latency_best": "NUMERIC",
+      "latency_wrst": "NUMERIC"
+    }
+  }
+}

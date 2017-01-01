@@ -1,7 +1,14 @@
-from functions import *
+import json
+from pprint import pprint
 
-sqlite_connnect('tracer.sqlite')
+with open('db_schema.json') as f:
+    data = json.load(f)
 
-sqlite_query_all('tracer')
+db_file = data['db_file']
+instnce = data['db_instance'][0]
+table = data['table_schema']['host']
 
-print(sqlite_query('select count from tracer')[0][1])
+
+print(db_file)
+print(instnce)
+print(table)
