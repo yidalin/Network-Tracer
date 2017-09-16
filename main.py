@@ -1,11 +1,8 @@
 # -*- coding: UTF-8 -*-
 
 import os
-
 import time
-
 import subprocess
-
 import re
 
 # mtr 8.8.8.8 -rwz -c 3 -o "SRDL ABW MX"
