@@ -11,11 +11,15 @@ import json
 
 def main(server='8.8.8.8', protocol='icmp', port='', count='3', output_path='./test.txt'):
 
-    base_mtr_command = 'sudo mtr ' + server + ' -rwz -c ' + count + ' -o "SRDL ABW MX" --json > ' + output_path
+    # base_mtr_command = 'sudo mtr ' + server + ' -rwz -c ' + count + ' -o "SRDL ABW MX" --json > ' + output_path
+    base_mtr_command = 'sudo mtr ' + server + ' -rwz -c ' + count + ' -o "SRDL ABW MX" --json'
 
     if protocol == 'icmp':
-        print(base_mtr_command)
         newprocess = subprocess.getoutput(base_mtr_command)
+
+        data = json.loads(newprocess)
+
+        print(data)
 
     if protocol == 'tcp':
         base_mtr_command += "--tcp "
@@ -42,7 +46,8 @@ with open('test.txt', 'a') as f:
 cwd = os.getcwd()
 print(cwd)
 '''
-
+'''
 f = open('test.txt', 'r')
 print(f.read())
 f.close()
+'''
