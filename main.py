@@ -19,7 +19,7 @@ def main(server='8.8.8.8', protocol='icmp', port='', count='3', output_path='./t
 
         data = json.loads(newprocess)
 
-        print(data)
+        print(data[0])
 
     if protocol == 'tcp':
         base_mtr_command += "--tcp "
