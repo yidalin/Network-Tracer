@@ -14,7 +14,7 @@ from functions import *
 def main(server='8.8.8.8', protocol='icmp', port='', count='3', output_path='./mtr-output.log'):
     # mtr 8.8.8.8 -rwz -c 3 -o "SRDL ABW MX"
     # base_mtr_command = 'sudo mtr ' + server + ' -rwz -c ' + count + ' -o "SRDL ABW MX" --json > ' + output_path
-    base_mtr_command = 'sudo mtr ' + server + ' -rwz -c ' + count + ' -o "SRDL ABW MX" --json'
+    base_mtr_command = 'sudo mtr ' + server + ' -nrwz -c ' + count + ' -o "SRDL ABW MX" --json'
 
     if protocol == 'icmp':
         newprocess = subprocess.getoutput(base_mtr_command)
@@ -49,7 +49,7 @@ column = \
     'latency_wrst NUMERIC'
 
 
-mtr_json = main(server='168.95.1.1')
+mtr_json = main(server='168.95.1.1', count='10')
 
 '''
 with open('test.txt') as f:
@@ -63,23 +63,31 @@ total_count = len(mtr_json['report']['hubs'])
 sqlite_connnect(database)
 sqlite_create_table(table, column)
 
-for i in range(0, total_count):
-    count = data['report']['hubs'][i]['count']
-    src_host = data['report']['mtr']['src']
-    dst_host = data['report']['mtr']['dst']
-    host = data['report']['hubs'][i]['host']
-    as_number = data['report']['hubs'][i]['ASN']
-    packet_snt = data['report']['hubs'][i]['Snt']
-    packet_rcv = data['report']['hubs'][i]['Rcv']
-    packet_drop = data['report']['hubs'][i]['Drop']
-    packet_loss = data['report']['hubs'][i]['Loss%']
-    latency_avg = data['report']['hubs'][i]['Avg']
-    latency_best = data['report']['hubs'][i]['Best']
-    latency_wrst = data['report']['hubs'][i]['Wrst']
+base_mtr = mtr_json['report']['mtr']
+base_hubs = mtr_json['report']['hubs']
 
-    insert_data = "'{}', '{}', '{}', {}, '{}', '{}', {}, {}, {}, {}, {}, {}, {}".format(current_time, src_host, dst_host, count, host, as_number, packet_snt, packet_rcv, packet_drop, packet_loss, latency_avg, latency_best, latency_wrst)
+for hop in range(0, total_count):
+    count = base_hubs[hop]['count']
+    src_host = base_mtr['src']
+    dst_host = base_mtr['dst']
+    host = base_hubs[hop]['host']
+    as_number = base_hubs[hop]['ASN']
+    packet_snt = base_hubs[hop]['Snt']
+    packet_rcv = base_hubs[hop]['Rcv']
+    packet_drop = base_hubs[hop]['Drop']
+    packet_loss = base_hubs[hop]['Loss%']
+    latency_avg = base_hubs[hop]['Avg']
+    latency_best = base_hubs[hop]['Best']
+    latency_wrst = base_hubs[hop]['Wrst']
+
+    insert_data = "'{}', '{}', '{}', {}, '{}', '{}', {}, {}, {}, {}, {}, {}, {}".\
+        format(current_time,src_host, dst_host,
+               count, host, as_number, packet_snt, packet_rcv, packet_drop, packet_loss,
+               latency_avg, latency_best, latency_wrst)
+
     sqlite_insert_data(table, insert_data)
+    print(insert_data)
 
-    i += 1
+    hop += 1
 
 sqlite_close()
