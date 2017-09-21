@@ -2,7 +2,7 @@
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
-    <orderEntry type="jdk" jdkName="Python 3.6.1 virtualenv at D:\virtualenv\Network-Tracer" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.6.2 virtualenv at /usr/local/var/pyenv/versions/venv_Network-Tracer_3.6.2" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TestRunnerService">
