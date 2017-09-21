@@ -1,4 +1,6 @@
-import time, json, sqlite3
+import time
+import json
+import sqlite3
 from pprint import pprint
 from functions import *
 
@@ -50,7 +52,4 @@ for i in range(0, total_count):
 
     i += 1
 
-#query_result = sqlite_query_all(table)
 sqlite_close()
-
-#print(query_result[5])

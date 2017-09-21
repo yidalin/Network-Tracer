@@ -25,3 +25,11 @@ def sqlite_query_all(table):
     cursor.execute("SELECT * FROM {}".format(table))
     values = cursor.fetchall()
     return values
+
+
+def sqlite_query(query):
+    cursor.execute("{}".format(query))
+    values = cursor.fetchall()
+    return values
+
+

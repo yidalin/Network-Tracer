@@ -1,5 +1,7 @@
-import time
+from functions import *
 
-t = time.strftime("%Y%m%d.%H%M", time.localtime())
+sqlite_connnect('tracer.sqlite')
 
-print(t)
+sqlite_query_all('tracer')
+
+print(sqlite_query('select count from tracer')[0][1])
