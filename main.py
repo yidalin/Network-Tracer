@@ -7,9 +7,9 @@ import json
 import sqlite3
 from pprint import pprint
 from functions import *
-
 # import re
 
+print(">> Import modules...")
 
 def main(server='8.8.8.8', protocol='icmp', port='', count='3', output_path='./mtr-output.log'):
     # mtr 8.8.8.8 -rwz -c 3 -o "SRDL ABW MX"
@@ -30,6 +30,7 @@ def main(server='8.8.8.8', protocol='icmp', port='', count='3', output_path='./m
         base_mtr_command += "-P " + str(port) + " "
 
 
+print(">> Define variables...")
 current_time = time.strftime("%Y-%m-%d %H:%M", time.localtime())
 database = 'tracer.sqlite'
 table = 'tracer'
@@ -49,6 +50,7 @@ column = \
     'latency_wrst NUMERIC'
 
 
+print(">> Processing main function...")
 mtr_json = main(server='168.95.1.1', count='10')
 
 '''
@@ -60,6 +62,8 @@ data = dict(data)
 
 total_count = len(mtr_json['report']['hubs'])
 
+
+print(">> Saving data to sqlite database...")
 sqlite_connnect(database)
 sqlite_create_table(table, column)
 
@@ -86,8 +90,13 @@ for hop in range(0, total_count):
                latency_avg, latency_best, latency_wrst)
 
     sqlite_insert_data(table, insert_data)
+
+    if hop == 0:
+        print(">> Inserting data...")
+
     print(insert_data)
 
     hop += 1
 
+print(">> Disconnecting the SQLite database...")
 sqlite_close()
