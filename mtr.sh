@@ -8,6 +8,6 @@ wget ftp://ftp.bitwizard.nl/mtr/mtr-0.92.tar.gz -O ./mtr-0.92.tar.gz
 
 tar zxvf ./mtr-0.92.tar.gz
 
-cd ./mtr-0.92.tar.gz
+cd ./mtr-0.92
 
 ./configure && make && make install
