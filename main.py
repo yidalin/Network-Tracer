@@ -7,6 +7,7 @@ import json
 import sqlite3
 from pprint import pprint
 from functions import *
+from getpass import getuser
 # import re
 
 print(">> Import modules...")
@@ -14,11 +15,17 @@ print(">> Import modules...")
 def main(server='8.8.8.8', protocol='icmp', port='', count='3', output_path='./mtr-output.log'):
     # mtr 8.8.8.8 -rwz -c 3 -o "SRDL ABW MX"
     # base_mtr_command = 'sudo mtr ' + server + ' -rwz -c ' + count + ' -o "SRDL ABW MX" --json > ' + output_path
-    base_mtr_command = 'sudo mtr ' + server + ' -nrwz -c ' + count + ' -o "SRDL ABW MX" --json'
+
+    if getuser() == 'root':
+        exec_mtr = 'mtr '
+    else:
+        exec_mtr = 'sudo mtr '
+
+    mtr_command = exec_mtr + server + ' -nrwz -c ' + count + ' -o "SRDL ABW MX" --json'
 
     if protocol == 'icmp':
-        newprocess = subprocess.getoutput(base_mtr_command)
-        data = json.loads(str(newprocess))
+        newprocess = subprocess.getoutput(mtr_command)
+        data = json.loads(newprocess)
         return data
 
     if protocol == 'tcp':
@@ -92,10 +99,9 @@ for hop in range(0, total_count):
     sqlite_insert_data(table, insert_data)
 
     if hop == 0:
-        print(">> Inserting data...")
+        print(">> Inserting data...\n")
 
     print(insert_data)
-
     hop += 1
 
 print(">> Disconnecting the SQLite database...")
