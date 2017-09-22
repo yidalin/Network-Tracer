@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd /root
+
 python3 -V > /dev/null 2>&1
 
 if [ $? -eq 0 ]; then
@@ -18,19 +20,22 @@ else
         echo -e "wget location: $(which wget)\n"
     fi
 
-    if [ ! -f /root/Python-3.6.2.tar.xz ]; then
+    if [ ! -f ./Python-3.6.2.tar.xz ]; then
         echo -e ">> Now downloading the Python 3.6.2 source code from officical website..."
-        wget https://www.python.org/ftp/python/3.6.2/Python-3.6.2.tar.xz -O /root/Python-3.6.2.tar.xz > /dev/null 2>&1
+        wget https://www.python.org/ftp/python/3.6.2/Python-3.6.2.tar.xz -O ./Python-3.6.2.tar.xz > /dev/null 2>&1
     fi
     
-    ls -l /root/Python-3.6.2.tar.xz
+    ls -l ./Python-3.6.2.tar.xz
+
     echo -e ">> Now extracting the Python-3.6.2.tar.xz too /root"
-    tar Jxvf Python-3.6.2.tar.xz -C /root/ > /dev/null 2>&1
+
+    tar Jxvf Python-3.6.2.tar.xz -C ./ > /dev/null 2>&1
     ls -ld Python-3.6.2
+
     echo -e ">> Now install gcc, make."
-    yum install -y gcc make
-    yum install zlib-devel -y
-    /root/Python-3.6.2/
+    yum install -y gcc make zlib-devel
+
+    cd ./Python-3.6.2
     ./configure --enable-optimizations
     make && make install
 
