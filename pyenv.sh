@@ -8,6 +8,6 @@ echo 'export PATH="~/.pyenv/bin:$PATH"' >> ~/.bash_profile
 echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
 echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bash_profile
 
-exec "$SHELL"
+source ~/.bash_profile
 
 pyenv -V
