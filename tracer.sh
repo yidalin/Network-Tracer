@@ -28,26 +28,28 @@ else
     ls -l ./Python-3.6.2.tar.xz
 
     echo -e ">> Now extracting the Python-3.6.2.tar.xz too /root"
-
     tar Jxvf Python-3.6.2.tar.xz -C ./ > /dev/null 2>&1
+    
     ls -ld Python-3.6.2
 
-    echo -e ">> Now install gcc, make."
+    echo -e ">> Now install gcc, make"
     yum install -y gcc make zlib-devel
 
+    echo -e ">> Now compiling the Python 3.6.2"
     cd ./Python-3.6.2
     ./configure --enable-optimizations
-    make && make install
-
+    make && make install && python3 -V
 fi
 
-exit
+which mtr > /dev/null 2>&1
 
-if [ $(which mtr) ]; then
-    echo -e ">> The command \"mtr\" exist.\n"
-    echo -e ">> Now executing main.py, please wait.\n"
+if [ $? -eq 0 ]; then
+    echo -e ">> The command \"mtr\" exist."
+    #echo -e ">> Now executing main.py, please wait.\n"
     #python3 main.py
 else
-    echo ">> Could not found mtr...\n"
+    echo -e ">> Could not found mtr..."
+    echo -e ">> Now installing mtr from yum repo"
+    yum install -y mtr > /dev/null 2>&1 && ls -l $(which mtr)
     exit
 fi
