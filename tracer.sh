@@ -1,7 +1,5 @@
 #!/bin/bash
 
-cd /root
-
 python3 -V > /dev/null 2>&1
 
 if [ $? -eq 0 ]; then
@@ -19,6 +17,8 @@ else
     else
         echo -e "wget location: $(which wget)\n"
     fi
+
+    cd /root
 
     if [ ! -f ./Python-3.6.2.tar.xz ]; then
         echo -e ">> Now downloading the Python 3.6.2 source code from officical website..."
