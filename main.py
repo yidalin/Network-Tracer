@@ -18,7 +18,7 @@ def main(server='8.8.8.8', protocol='icmp', port='', count='3', output_path='./m
 
     if protocol == 'icmp':
         newprocess = subprocess.getoutput(base_mtr_command)
-        data = json.loads(newprocess)
+        data = json.loads(str(newprocess))
         return data
 
     if protocol == 'tcp':
