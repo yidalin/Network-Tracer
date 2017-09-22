@@ -29,6 +29,10 @@ else
     ls -ld Python-3.6.2
     echo -e ">> Now install gcc, make."
     yum install -y gcc make
+    yum install zlib-devel -y
+    /root/Python-3.6.2/
+    ./configure --enable-optimizations
+    make && make install
 
 fi
 
