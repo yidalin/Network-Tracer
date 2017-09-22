@@ -1,5 +1,7 @@
 #!/bin/bash
 
+yum install -y gcc zlib-devel.x86_64 bzip2.x86_64 bzip2-devel.x86_64 readline-devel.x86_64 openssl-devel.x86_64
+
 curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
 
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
@@ -12,6 +14,5 @@ source ~/.bash_profile
 
 pyenv -v
 
-yum install -y zlib-devel.x86_64 bzip2.x86_64 bzip2-devel.x86_64 readline-devel.x86_64 openssl-devel.x86_64
-
+# pyenv install 2.7.14
 pyenv install 3.6.2
