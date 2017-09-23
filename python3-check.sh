@@ -40,16 +40,3 @@ else
     ./configure --enable-optimizations
     make && make install && python3 -V
 fi
-
-which mtr > /dev/null 2>&1
-
-if [ $? -eq 0 ]; then
-    echo -e ">> The command \"mtr\" exist."
-    #echo -e ">> Now executing main.py, please wait.\n"
-    #python3 main.py
-else
-    echo -e ">> Could not found mtr..."
-    echo -e ">> Now installing mtr from yum repo"
-    yum install -y mtr > /dev/null 2>&1 && ls -l $(which mtr)
-    exit
-fi

@@ -9,6 +9,14 @@ read choice
 if [ ${choice} -eq '1' ]; then
     echo "You choose wget"
 
+    which wget > /dev/null 2>&1
+    if [ ! $? -eq '0' ]; then
+        echo -e ">> Could not found wget, now install it..."
+        yum install -y wget > /dev/null && echo -e 'wget installed\n'
+    else
+        echo -e "wget location: $(which wget)\n"
+    fi
+
 elif [ ${choice} -eq '2' ]; then
     echo "You choose mtr"
 
