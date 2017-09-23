@@ -1,7 +1,8 @@
 #!/bin/bash
 
 echo -e "\t1: Check the wget
-\t2: Check the mtr"
+\t2: Check the mtr
+\t3: Check the pyenv"
 
 echo -n "Please choose one option: "
 read choice
@@ -42,4 +43,6 @@ elif [ ${choice} -eq '2' ]; then
         tar zxvf ./mtr-0.92.tar.gz && cd ./mtr-0.92
         ./configure && make && make install
     fi
+    elif [ ${choice} -eq '3' ]; then
+        bash ./pyenv.sh
 fi
