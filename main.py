@@ -12,15 +12,12 @@ from getpass import getuser
 '''
 
 current_time = time.strftime("%Y-%m-%d %H:%M", time.localtime())
-print(">> Define variables...")
 
-
-print(">> Processing main function...")
 mtr_json = main(server='168.95.1.1', count='10')
 
 total_count = len(mtr_json['report']['hubs'])
 
-print(">> Saving data to sqlite database...")
+# print(">> Saving data to sqlite database...")
 sqlite_connnect('db_schema.json')
 sqlite_create_table('db_schema.json', 'tracer')
 
