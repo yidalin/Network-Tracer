@@ -1,3 +1,5 @@
+#!/bin/bash
+
 yum install -y git
 
 if [ ! -d /git ]; then

@@ -13,7 +13,7 @@ from getpass import getuser
 
 current_time = time.strftime("%Y-%m-%d %H:%M", time.localtime())
 
-mtr_json = main(server='168.95.1.1', count='10')
+mtr_json = main(server='google.com', count='10')
 
 total_count = len(mtr_json['report']['hubs'])
 
