@@ -38,9 +38,13 @@ def main(server='8.8.8.8', protocol='icmp', port='', count='3', output_path='./m
 
 
 print(">> Define variables...")
+
 current_time = time.strftime("%Y-%m-%d %H:%M", time.localtime())
-database = 'tracer.sqlite'
+
+database = '/git/Tracer/tracer.sqlite'
+
 table = 'tracer'
+
 column = \
     'datetime SMALLDATETIME, ' \
     'src_host TEXT, ' \
