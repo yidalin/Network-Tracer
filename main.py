@@ -1,16 +1,19 @@
 # -*- coding: UTF-8 -*-
 
+import time
+from functions import *
+'''
 import sqlite3
+import sys
 import os
 from pprint import pprint
-import time
 import json
-from functions import *
-
-# import re
-# print(">> Define variables...")
+from getpass import getuser
+'''
 
 current_time = time.strftime("%Y-%m-%d %H:%M", time.localtime())
+print(">> Define variables...")
+
 
 print(">> Processing main function...")
 mtr_json = main(server='168.95.1.1', count='10')
