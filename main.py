@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 
+import sys
 import os
 import time
 import subprocess
@@ -9,6 +10,8 @@ from pprint import pprint
 from functions import *
 from getpass import getuser
 # import re
+
+print(">> Now the Python version is {}".format(sys.version))
 
 print(">> Import modules...")
 
