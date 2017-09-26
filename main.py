@@ -20,24 +20,26 @@ total_count = len(mtr_json['report']['hubs'])
 # print(">> Saving data to sqlite database...")
 sqlite_connnect('db_schema.json')
 sqlite_create_table('db_schema.json', 'tracer')
+sqlite_create_table('db_schema.json', 'route')
 
 
 base_mtr = mtr_json['report']['mtr']
 base_hubs = mtr_json['report']['hubs']
+hop_list = ""
 
-for hop in range(0, total_count):
+for node in range(0, total_count):
     src_host = base_mtr['src']
     dst_host = base_mtr['dst']
-    host = base_hubs[hop]['host']
-    as_number = base_hubs[hop]['ASN']
-    packet_count = base_hubs[hop]['count']
-    packet_snt = base_hubs[hop]['Snt']
-    packet_rcv = base_hubs[hop]['Rcv']
-    packet_drop = base_hubs[hop]['Drop']
-    packet_loss = base_hubs[hop]['Loss%']
-    latency_avg = base_hubs[hop]['Avg']
-    latency_best = base_hubs[hop]['Best']
-    latency_wrst = base_hubs[hop]['Wrst']
+    host = base_hubs[node]['host']
+    as_number = base_hubs[node]['ASN']
+    packet_count = base_hubs[node]['count']
+    packet_snt = base_hubs[node]['Snt']
+    packet_rcv = base_hubs[node]['Rcv']
+    packet_drop = base_hubs[node]['Drop']
+    packet_loss = base_hubs[node]['Loss%']
+    latency_avg = base_hubs[node]['Avg']
+    latency_best = base_hubs[node]['Best']
+    latency_wrst = base_hubs[node]['Wrst']
 
     insert_data = "'{}', '{}', '{}', '{}', '{}', {}, {}, {}, {}, {}, {}, {}, {}".\
         format(current_time, src_host, dst_host,
@@ -46,11 +48,21 @@ for hop in range(0, total_count):
 
     sqlite_insert_data('db_schema.json', 'tracer', insert_data)
 
-    if hop == 0:
+    if node == 0:
         print(">> Inserting data...\n")
 
     print(insert_data)
-    hop += 1
+    node += 1
+
+    hop_list = hop_list + "'" + host + "', "
+
+routing = "'{}', '{}', '{}', {}".format(current_time, src_host, dst_host, hop_list[:-2])
+print(routing)
+print(packet_count)
+
+
+#sqlite_insert_data('db_schema.json', 'route', routing)
+
 
 print(">> Disconnecting the SQLite database...")
 sqlite_close()

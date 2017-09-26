@@ -1,14 +1,9 @@
-import json
-from pprint import pprint
+#list = ['a', 'b']
 
-with open('db_schema.json') as f:
-    data = json.load(f)
+list =['-'] * 30
 
-db_file = data['db_file']
-instnce = data['db_instance'][0]
-table = data['table_schema']['host']
-
-
-print(db_file)
-print(instnce)
-print(table)
+print(list)
+print(list[1])
+list[1] = 'c'
+print(list)
+print(type(list))
