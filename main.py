@@ -15,10 +15,10 @@ mtr_json = main(server=sys.argv[1], count=sys.argv[2])
 total_count = len(mtr_json['report']['hubs'])
 
 # print(">> Saving data to sqlite database...")
-print(">> Connecting the SQLite database.")
+# print(">> Connecting the SQLite database.")
 sqlite_connnect('/git/Tracer/db_schema.json')
 
-print(">> Creating table if it is not exist.")
+# print(">> Creating table if it is not exist.")
 sqlite_create_table('/git/Tracer/db_schema.json', 'tracer')
 sqlite_create_table('/git/Tracer/db_schema.json', 'route')
 
@@ -50,7 +50,7 @@ for node in range(0, total_count):
                host, as_number, packet_count, packet_snt, packet_rcv, packet_drop, packet_loss,
                latency_avg, latency_best, latency_wrst)
 
-    print(">> Inserting data to tracer table.")
+    # print(">> Inserting data to tracer table.")
     sqlite_insert_data('/git/Tracer/db_schema.json', 'tracer', insert_data)
 
     if node == 0:
@@ -69,8 +69,8 @@ for i in route_list:
 
 route_str = route_str[2:]
 
-print(">> Inserting data to route table.")
+# print(">> Inserting data to route table.")
 sqlite_insert_data('/git/Tracer/db_schema.json', 'route', route_str)
 
-print(">> Disconnecting the SQLite database.")
+# print(">> Disconnecting the SQLite database.")
 sqlite_close()
