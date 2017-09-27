@@ -47,7 +47,7 @@ for node in range(0, total_count):
                host, as_number, packet_count, packet_snt, packet_rcv, packet_drop, packet_loss,
                latency_avg, latency_best, latency_wrst)
 
-    sqlite_insert_data('db_schema.json', 'tracer', insert_data)
+    sqlite_insert_data('/git/Tracer/db_schema.json', 'tracer', insert_data)
 
     if node == 0:
         print(">> Inserting data...\n")
@@ -65,7 +65,7 @@ for i in route_list:
 
 route_str = route_str[2:]
 
-sqlite_insert_data('db_schema.json', 'route', route_str)
+sqlite_insert_data('/git/Tracer/db_schema.json', 'route', route_str)
 
 
 print(">> Disconnecting the SQLite database...")
