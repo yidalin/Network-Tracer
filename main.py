@@ -2,18 +2,10 @@
 
 import time
 from functions import *
-'''
-import sqlite3
-import sys
-import os
-from pprint import pprint
-import json
-from getpass import getuser
-'''
 
 current_time = time.strftime("%Y-%m-%d %H:%M", time.localtime())
 
-mtr_json = main(server='google.com', count='10')
+mtr_json = main(server='google.com', count='30')
 
 total_count = len(mtr_json['report']['hubs'])
 
@@ -25,7 +17,11 @@ sqlite_create_table('db_schema.json', 'route')
 
 base_mtr = mtr_json['report']['mtr']
 base_hubs = mtr_json['report']['hubs']
-hop_list = ""
+
+src_host = ''
+dst_host = ''
+
+route = ['-'] * 30
 
 for node in range(0, total_count):
     src_host = base_mtr['src']
@@ -52,16 +48,21 @@ for node in range(0, total_count):
         print(">> Inserting data...\n")
 
     print(insert_data)
+    print(type(insert_data))
     node += 1
 
-    hop_list = hop_list + "'" + host + "', "
-
-routing = "'{}', '{}', '{}', {}".format(current_time, src_host, dst_host, hop_list[:-2])
-print(routing)
-print(packet_count)
+    route[int(packet_count)-1] = host
 
 
-#sqlite_insert_data('db_schema.json', 'route', routing)
+route_list = [current_time] + [src_host] + [dst_host] + route
+route_str = ''
+
+for i in route_list:
+    route_str = route_str + ', ' + '\'' + i + '\''
+
+route_str = route_str[2:]
+
+sqlite_insert_data('db_schema.json', 'route', route_str)
 
 
 print(">> Disconnecting the SQLite database...")
