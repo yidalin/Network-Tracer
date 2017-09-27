@@ -54,7 +54,7 @@ for node in range(0, total_count):
     sqlite_insert_data('/git/Tracer/db_schema.json', 'tracer', insert_data)
 
     if node == 0:
-        print(">> Inserting data...\n")
+        # print(">> Inserting data...\n")
 
     node += 1
 
