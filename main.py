@@ -15,9 +15,9 @@ mtr_json = main(server=sys.argv[1], count=sys.argv[2])
 total_count = len(mtr_json['report']['hubs'])
 
 # print(">> Saving data to sqlite database...")
-sqlite_connnect('db_schema.json')
-sqlite_create_table('db_schema.json', 'tracer')
-sqlite_create_table('db_schema.json', 'route')
+sqlite_connnect('/git/Tracer/db_schema.json')
+sqlite_create_table('/git/Tracer/db_schema.json', 'tracer')
+sqlite_create_table('/git/Tracer/db_schema.json', 'route')
 
 
 base_mtr = mtr_json['report']['mtr']
