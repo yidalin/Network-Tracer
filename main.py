@@ -1,11 +1,16 @@
 # -*- coding: UTF-8 -*-
-
 import time
+import sys
 from functions import *
+
+
+if len(sys.argv) < 3:
+    print("Please make sure you give enough arguments")
+    sys.exit(1)
 
 current_time = time.strftime("%Y-%m-%d %H:%M", time.localtime())
 
-mtr_json = main(server='google.com', count='30')
+mtr_json = main(server=sys.argv[1], count=sys.argv[2])
 
 total_count = len(mtr_json['report']['hubs'])
 
@@ -47,8 +52,6 @@ for node in range(0, total_count):
     if node == 0:
         print(">> Inserting data...\n")
 
-    print(insert_data)
-    print(type(insert_data))
     node += 1
 
     route[int(packet_count)-1] = host
