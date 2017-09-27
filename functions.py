@@ -40,7 +40,7 @@ def sqlite_create_table(reference_file='db_schema.json', db_instance='tracer'):
     cursor.execute(create_table)
 
 
-def sqlite_insert_data(reference_file='db_schema.json', db_instance='tracer', values=''):
+def sqlite_insert_data(reference_file='/git/Tracer/db_schema.json', db_instance='tracer', values=''):
     import json
 
     with open(reference_file) as db:
